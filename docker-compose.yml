@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mygoodnotes-wa:
+    build: 
+      context: .
+      dockerfile: ./mygoodnotes-wa/Dockerfile
+    ports:
+      - "4000:4000"
+
+  mygoodnotes-ba:
+    build:
+      context: .
+      dockerfile: ./mygoodnotes-ba/Dockerfile
+    depends_on:
+      - mygoodnotes-db
+      - redis
+    environment:
+      MONGO_CONNECTION_STRING: "mongodb://mygoodnotes-db:27017"
+      REDIS_URL: "redis://redis:6379"
+    ports:
+      - "3000:3000"
+
+  mygoodnotes-db:
+    image: mongo:5
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:6.0-alpine
+    restart: always
+
+volumes:
+  mongodb_data:
