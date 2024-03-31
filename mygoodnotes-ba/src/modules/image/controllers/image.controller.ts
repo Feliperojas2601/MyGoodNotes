@@ -11,7 +11,8 @@ import {
 import { ImageService } from '../services/image.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { createControllerResponse } from 'src/shared/utils/createControllerResponse';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { FileUploadDto } from '../dtos/fileUpload..dto';
 
 @ApiTags('image')
 @Controller('image')
@@ -20,7 +21,11 @@ export class ImageController {
 
   @Post()
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('image'))
+  @ApiBody({
+    description: 'Image file to upload',
+    type: FileUploadDto,
+  })
+  @UseInterceptors(FileInterceptor('file'))
   async create(
     @UploadedFile(
       new ParseFilePipe({
@@ -31,9 +36,9 @@ export class ImageController {
         ],
       }),
     )
-    image: Express.Multer.File,
+    file: Express.Multer.File,
   ) {
-    const serviceReponse = await this.imageService.create(image.buffer);
+    const serviceReponse = await this.imageService.create(file.buffer);
     if (!serviceReponse.success) {
       return createControllerResponse(null, 400, serviceReponse.message, false);
     }
