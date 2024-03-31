@@ -1,0 +1,25 @@
+.title-side-menu {
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+}
+
+.title-side-menu .title span {
+  margin-top: 1rem;
+  display: inline-block;
+  transform: rotate(90deg);
+}

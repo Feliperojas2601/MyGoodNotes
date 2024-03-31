@@ -1,0 +1,17 @@
+main {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.app-title-side-menu {
+  width: 5%;
+  height: 100%;
+  border-right: 5px solid #fff;
+}
+
+.app-main-side-menu {
+  width: 25%;
+  height: 100%;
+  border-right: 5px solid #fff;
+}

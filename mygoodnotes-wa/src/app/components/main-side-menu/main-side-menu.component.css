@@ -1,0 +1,10 @@
+.p-tree {
+  background-color: var(--background-color);
+  border: 0;
+  border-radius: 0%;
+  color: #fff;
+}
+
+.p-treenode-icon {
+  color: #fff;
+}
