@@ -13,7 +13,7 @@ export class Note extends Document {
   @Prop()
   content: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Book' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true })
   book: Book;
 }
 

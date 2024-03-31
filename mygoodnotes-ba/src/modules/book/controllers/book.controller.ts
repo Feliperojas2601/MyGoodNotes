@@ -8,40 +8,21 @@ import {
   Post,
 } from '@nestjs/common';
 import { BookService } from '../services/book.service';
-import { ControllerResponse } from 'src/shared/interfaces/controllerResponse.interface';
 import { CreateBookDto } from '../dtos/createBook.dto';
 import { UpdateBookDto } from '../dtos/updateBook.dto';
+import { createControllerResponse } from 'src/shared/utils/createControllerResponse';
 
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
-  public createControllerResponse<T>(
-    data: T,
-    status: number,
-    message: string,
-    success: boolean,
-  ): ControllerResponse<T> {
-    return {
-      data,
-      message,
-      success,
-      status,
-    };
-  }
-
   @Post()
   async create(@Body() createBookDto: CreateBookDto) {
     const serviceReponse = await this.bookService.create(createBookDto);
     if (!serviceReponse.success) {
-      return this.createControllerResponse(
-        null,
-        400,
-        serviceReponse.message,
-        false,
-      );
+      return createControllerResponse(null, 400, serviceReponse.message, false);
     }
-    return this.createControllerResponse(
+    return createControllerResponse(
       serviceReponse.data,
       200,
       serviceReponse.message,
@@ -53,14 +34,9 @@ export class BookController {
   async findAll() {
     const serviceReponse = await this.bookService.findAll();
     if (!serviceReponse.success) {
-      return this.createControllerResponse(
-        null,
-        400,
-        serviceReponse.message,
-        false,
-      );
+      return createControllerResponse(null, 400, serviceReponse.message, false);
     }
-    return this.createControllerResponse(
+    return createControllerResponse(
       serviceReponse.data,
       200,
       serviceReponse.message,
@@ -72,14 +48,9 @@ export class BookController {
   async findOne(@Param('id') id: string) {
     const serviceReponse = await this.bookService.findOne(id);
     if (!serviceReponse.success) {
-      return this.createControllerResponse(
-        null,
-        400,
-        serviceReponse.message,
-        false,
-      );
+      return createControllerResponse(null, 400, serviceReponse.message, false);
     }
-    return this.createControllerResponse(
+    return createControllerResponse(
       serviceReponse.data,
       200,
       serviceReponse.message,
@@ -91,14 +62,14 @@ export class BookController {
   async update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
     const serviceResponse = await this.bookService.update(id, updateBookDto);
     if (!serviceResponse.success) {
-      return this.createControllerResponse(
+      return createControllerResponse(
         null,
         400,
         serviceResponse.message,
         false,
       );
     }
-    return this.createControllerResponse(
+    return createControllerResponse(
       serviceResponse.data,
       200,
       serviceResponse.message,
@@ -110,14 +81,14 @@ export class BookController {
   async remove(@Param('id') id: string) {
     const serviceResponse = await this.bookService.remove(id);
     if (!serviceResponse.success) {
-      return this.createControllerResponse(
+      return createControllerResponse(
         null,
         400,
         serviceResponse.message,
         false,
       );
     }
-    return this.createControllerResponse(
+    return createControllerResponse(
       serviceResponse.data,
       200,
       serviceResponse.message,
