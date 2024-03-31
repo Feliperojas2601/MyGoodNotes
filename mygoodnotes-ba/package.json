@@ -20,9 +20,16 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/cache-manager": "^2.2.2",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.2.1",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/mongoose": "^10.0.4",
     "@nestjs/platform-express": "^9.0.0",
+    "cache-manager": "^5.4.0",
+    "cache-manager-redis-yet": "^4.2.0",
+    "mongoose": "^8.2.4",
+    "redis": "^4.6.13",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
