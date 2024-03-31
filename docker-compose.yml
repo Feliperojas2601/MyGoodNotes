@@ -24,13 +24,11 @@ services:
 
   mygoodnotes-db:
     image: mongo:5
-    restart: always
     volumes:
       - mongodb_data:/data/db
 
   redis:
     image: redis:6.0-alpine
-    restart: always
 
 volumes:
   mongodb_data:
