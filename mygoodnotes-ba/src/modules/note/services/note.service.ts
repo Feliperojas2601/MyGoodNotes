@@ -6,16 +6,25 @@ import { CreateNoteDto } from '../dtos/createNote.dto';
 import { UpdateNoteDto } from '../dtos/updateNote.dto';
 import { ServiceResponse } from 'src/shared/interfaces/serviceResponse.interface';
 import { createServiceResponse } from 'src/shared/utils/createServiceResponse';
+import { BookService } from 'src/modules/book/services/book.service';
 
 @Injectable()
 export class NoteService {
   constructor(
     @InjectModel(Note.name) private readonly noteModel: Model<NoteDocument>,
+    private readonly bookService: BookService,
   ) {}
 
   async create(createNoteDto: CreateNoteDto): Promise<ServiceResponse<Note>> {
     try {
-      const createdNote = new this.noteModel(createNoteDto);
+      const bookResponse = await this.bookService.findOne(createNoteDto.bookId);
+      if (!bookResponse.success) {
+        return createServiceResponse(null, bookResponse.message, false);
+      }
+      const createdNote = new this.noteModel({
+        ...createNoteDto,
+        book: bookResponse.data,
+      });
       const createResponse = await createdNote.save();
       return createServiceResponse(createResponse, 'Note created', true);
     } catch (error) {
@@ -42,6 +51,7 @@ export class NoteService {
           false,
         );
       }
+      return createServiceResponse(note, 'Note found', true);
     } catch (error) {
       return createServiceResponse(null, error.message, false);
     }

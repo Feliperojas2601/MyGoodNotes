@@ -42,6 +42,7 @@ export class BookService {
           false,
         );
       }
+      return createServiceResponse(book, 'Book found', true);
     } catch (error) {
       return createServiceResponse(null, error.message, false);
     }
