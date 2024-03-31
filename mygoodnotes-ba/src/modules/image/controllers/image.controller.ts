@@ -11,12 +11,15 @@ import {
 import { ImageService } from '../services/image.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { createControllerResponse } from 'src/shared/utils/createControllerResponse';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('image')
 @Controller('image')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
   @Post()
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image'))
   async create(
     @UploadedFile(

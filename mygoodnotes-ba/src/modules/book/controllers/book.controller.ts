@@ -11,7 +11,9 @@ import { BookService } from '../services/book.service';
 import { CreateBookDto } from '../dtos/createBook.dto';
 import { UpdateBookDto } from '../dtos/updateBook.dto';
 import { createControllerResponse } from 'src/shared/utils/createControllerResponse';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('book')
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}

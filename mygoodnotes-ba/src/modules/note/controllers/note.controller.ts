@@ -11,7 +11,9 @@ import { NoteService } from '../services/note.service';
 import { CreateNoteDto } from '../dtos/createNote.dto';
 import { UpdateNoteDto } from '../dtos/updateNote.dto';
 import { createControllerResponse } from 'src/shared/utils/createControllerResponse';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('note')
 @Controller('note')
 export class NoteController {
   constructor(private readonly noteService: NoteService) {}
