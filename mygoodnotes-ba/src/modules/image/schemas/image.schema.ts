@@ -7,9 +7,6 @@ export type ImageDocument = HydratedDocument<Image>;
 export class Image extends Document {
   @Prop({ required: true })
   binaryData: Buffer;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
 }
 
 export const ImageSchema = SchemaFactory.createForClass(Image);
