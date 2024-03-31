@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsMongoId, IsNotEmpty, IsString } from 'class-validator';
+import { IsMongoId, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreateNoteDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MaxLength(20)
   readonly title: string;
 
   @ApiProperty()
