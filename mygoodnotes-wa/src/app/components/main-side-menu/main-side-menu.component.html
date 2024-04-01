@@ -1,3 +1,19 @@
 <section>
-  <p-tree class="w-full" [value]="books"></p-tree>
+  <p-dialog [(visible)]="showDialog" [modal]="true" [header]="creationMode ? 'Create book' : 'Update book'">
+    <ng-template pTemplate="content">
+      <div class="p-grid p-fluid">
+        <div class="p-col-4">
+          <label for="title">Título</label>
+        </div>
+        <div class="p-col-8">
+          <input id="title" pInputText type="text" [(ngModel)]="newBookTitle" />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button type="button" pButton icon="pi pi-check" (click)="creationMode ? createBook() : updateBook()" label="Guardar"></button>
+    </ng-template>
+  </p-dialog>  
+  <button (click)="showCreateDialog()" icon="pi pi-plus" class="p-button p-button-rounded p-button-secondary">Agregar</button>
+  <p-tree class="w-full" selectionMode="single" [value]="books"></p-tree>
 </section>

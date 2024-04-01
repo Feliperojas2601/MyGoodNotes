@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { TitleSideMenuComponent } from './components/title-side-menu/title-side-menu.component';
 import { MainSideMenuComponent } from './components/main-side-menu/main-side-menu.component';
 
