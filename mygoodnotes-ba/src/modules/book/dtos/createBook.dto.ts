@@ -7,12 +7,4 @@ export class CreateBookDto {
   @IsString()
   @MaxLength(25)
   readonly title: string;
-
-  @ApiProperty()
-  @IsString()
-  readonly description?: string;
-
-  @ApiProperty()
-  @IsString()
-  readonly color?: string;
 }
