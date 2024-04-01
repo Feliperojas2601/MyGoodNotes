@@ -7,6 +7,6 @@ RUN npm run build
 
 FROM node:18-alpine
 WORKDIR /usr/app
-COPY --from=build /app/src/dist/mygoodnotes-wa/server ./
-CMD node server.mjs
+COPY --from=build /app/src/dist/mygoodnotes-wa ./
+CMD node server/server.mjs
 EXPOSE 4000
